@@ -17,5 +17,4 @@ const Character = () => {
 `
   return view
 }
-
 export default Character
