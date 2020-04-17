@@ -3,6 +3,8 @@ import Header from '../templates/Header'
 import Home from '../pages/Home'
 import Character from '../pages/Character'
 import Error404 from '../pages/Error404'
+import getHashc from '../utils/getHash'
+import resolveRoutes from '../utils/resolveRoutes'
 
 //vamos a establecer las rutas:
 const routes = {
