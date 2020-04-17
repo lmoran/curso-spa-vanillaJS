@@ -3,7 +3,7 @@ import Header from '../templates/Header'
 import Home from '../pages/Home'
 import Character from '../pages/Character'
 import Error404 from '../pages/Error404'
-import getHashc from '../utils/getHash'
+import getHash from '../utils/getHash'
 import resolveRoutes from '../utils/resolveRoutes'
 
 //vamos a establecer las rutas:
@@ -20,5 +20,14 @@ const router = async () => {
   const content = null || document.getElementById('content')
   //las indexamos: ojo le colocamos await porque vamos a esperar la petición de ese template Header
   header.innerHTML = await Header()
+  //jalamos el hash:
+  let hash = getHash()
+  //veirificamos el hash con el resolveRoutes y le pasamos el hash de arriba
+  let route = await resolveRoutes(hash)
+  //vamos a comparar las rutas de la const routes: ejem si lo traido por resolveRoutes sea un /id lo comparamos con /:id de routes
+  //routes./ , routes./:id
+  let render = routes[route] ? routes[route] : Error404
+  //Lo mostramos en el navegador en content:
+  content.innerHTML = await render()
 }
 export default router
