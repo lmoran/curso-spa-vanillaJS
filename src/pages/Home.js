@@ -1,15 +1,25 @@
+//importamos el getData
+import getData from '../utils/getData'
+
 //generamos una funcion que nos va retornar la vista que necesitamos:
-const Home = () => {
+const Home = async () => {
+  const characters = await getData()
   const view = `
     <div class="Characters">
-      <article class="Character-item">
-        <a href= "#/1/">
-          <img src= "image" alt="name">
-          <h2>Name</h2>
+      ${characters.results
+        .map(
+          character => `
+        <article class="Character-item">
+        <a href= "${character.id}">
+          <img src= "${character.image}" alt="${character.name}">
+          <h2>${character.name}</h2>
         </a>
       </article>
-    </div>
-`
+      `
+        )
+        .join('')} 
+    </div> `
+  //como es arreglo lo va separar por comillas y para eso utilizamos join uqe va eliminar eso.
   return view
 }
 //exportamos el archivo para que lo podamos utilizar en otros archivos de JavaScript
