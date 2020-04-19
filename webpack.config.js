@@ -4,6 +4,8 @@ const path = require('path')
 //archivo necesario para trabajar con HTML
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //En el sgte modulo se va encontrar toda la configuraación de lo que va a suceder. Modulo para exportar, ese modulo es un objeto.
+//plugin para copiar archivos a produccion, por ejemplo en el py vamos a manadar los styles a dist
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
   //vamos a declarar el punto de entrada con su ruta, aqui vive nuestro código inicial y de aqui parte al desarrollo
   entry: './src/index.js',
@@ -44,6 +46,12 @@ module.exports = {
       template: './public/index.html',
       //EL nombre que tendrá el archivo
       filename: './index.html'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: './src/styles/styles.css',
+        to: ''
+      }
+    ])
   ]
 }
